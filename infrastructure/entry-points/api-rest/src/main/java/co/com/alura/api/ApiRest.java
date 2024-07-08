@@ -1,20 +1,60 @@
 package co.com.alura.api;
+
+import co.com.alura.jpa.topicos.*;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import java.net.URI;
 
 @RestController
-@RequestMapping(value = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/topicos", produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
+@SecurityRequirement(name = "bearer-key")
 public class ApiRest {
-//    private final MyUseCase useCase;
+    private final TopicoService topicoService;
 
 
-    @GetMapping(path = "/path")
-    public String commandName() {
-//      return useCase.doAction();
-        return "Hello World";
+    @GetMapping
+    @Operation(summary = "Obtiene el listado de los topicos")
+    public ResponseEntity<Page<DatosTopico>> listarTopicos(@PageableDefault(size = 10)Pageable paginacion){
+        var response = topicoService.listarTopicos(paginacion);
+        return ResponseEntity.ok(response);
+    }
+
+
+
+    @PostMapping
+    @Transactional
+    @Operation(summary = "Registra un nuevo topico")
+    public ResponseEntity crear(@RequestBody @Valid DatosCrearTopico datos, UriComponentsBuilder uriBuilder) {
+        var response = topicoService.crearTopico(datos);
+        URI location = uriBuilder.path("/topicos/{id}").buildAndExpand(response.id()).toUri();
+        return ResponseEntity.created(location).body(response);
+    }
+
+    @PutMapping
+    @Transactional
+    @Operation(summary = "Actualiza un topico")
+    public ResponseEntity actualizarTopico(@RequestBody @Valid DatosActualizarTopico datos) {
+        var response = topicoService.actualizarTopico(datos);
+        return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    @Operation(summary = "Elimina un topico")
+    public ResponseEntity eliminarTopico(@PathVariable("id") Long id) {
+        var response = topicoService.eliminarTopico(id);
+        return ResponseEntity.ok(response);
     }
 }

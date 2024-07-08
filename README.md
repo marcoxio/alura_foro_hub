@@ -2,9 +2,9 @@
 
 ## Antes de Iniciar
 
-Empezaremos por explicar los diferentes componentes del proyectos y partiremos de los componentes externos, continuando con los componentes core de negocio (dominio) y por último el inicio y configuración de la aplicación.
+Empezaremos por explicar los diferentes componentes del proyectos y partiremos de los componentes externos, continuando con los componentes core de negocio (dominio) y por ï¿½ltimo el inicio y configuraciï¿½n de la aplicaciï¿½n.
 
-Lee el artículo [Clean Architecture — Aislando los detalles](https://medium.com/bancolombia-tech/clean-architecture-aislando-los-detalles-4f9530f35d7a)
+Lee el artï¿½culo [Clean Architecture ï¿½ Aislando los detalles](https://medium.com/bancolombia-tech/clean-architecture-aislando-los-detalles-4f9530f35d7a)
 
 # Arquitectura
 
@@ -12,11 +12,11 @@ Lee el artículo [Clean Architecture — Aislando los detalles](https://medium.com/
 
 ## Domain
 
-Es el módulo más interno de la arquitectura, pertenece a la capa del dominio y encapsula la lógica y reglas del negocio mediante modelos y entidades del dominio.
+Es el mï¿½dulo mï¿½s interno de la arquitectura, pertenece a la capa del dominio y encapsula la lï¿½gica y reglas del negocio mediante modelos y entidades del dominio.
 
 ## Usecases
 
-Este módulo gradle perteneciente a la capa del dominio, implementa los casos de uso del sistema, define lógica de aplicación y reacciona a las invocaciones desde el módulo de entry points, orquestando los flujos hacia el módulo de entities.
+Este mï¿½dulo gradle perteneciente a la capa del dominio, implementa los casos de uso del sistema, define lï¿½gica de aplicaciï¿½n y reacciona a las invocaciones desde el mï¿½dulo de entry points, orquestando los flujos hacia el mï¿½dulo de entities.
 
 ## Infrastructure
 
@@ -24,9 +24,9 @@ Este módulo gradle perteneciente a la capa del dominio, implementa los casos de 
 
 En el apartado de helpers tendremos utilidades generales para los Driven Adapters y Entry Points.
 
-Estas utilidades no están arraigadas a objetos concretos, se realiza el uso de generics para modelar comportamientos
-genéricos de los diferentes objetos de persistencia que puedan existir, este tipo de implementaciones se realizan
-basadas en el patrón de diseño [Unit of Work y Repository](https://medium.com/@krzychukosobudzki/repository-design-pattern-bc490b256006)
+Estas utilidades no estï¿½n arraigadas a objetos concretos, se realiza el uso de generics para modelar comportamientos
+genï¿½ricos de los diferentes objetos de persistencia que puedan existir, este tipo de implementaciones se realizan
+basadas en el patrï¿½n de diseï¿½o [Unit of Work y Repository](https://medium.com/@krzychukosobudzki/repository-design-pattern-bc490b256006)
 
 Estas clases no puede existir solas y debe heredarse su compartimiento en los **Driven Adapters**
 
@@ -38,10 +38,180 @@ interactuar.
 
 ### Entry Points
 
-Los entry points representan los puntos de entrada de la aplicación o el inicio de los flujos de negocio.
+Los entry points representan los puntos de entrada de la aplicaciï¿½n o el inicio de los flujos de negocio.
 
 ## Application
 
-Este módulo es el más externo de la arquitectura, es el encargado de ensamblar los distintos módulos, resolver las dependencias y crear los beans de los casos de use (UseCases) de forma automática, inyectando en éstos instancias concretas de las dependencias declaradas. Además inicia la aplicación (es el único módulo del proyecto donde encontraremos la función “public static void main(String[] args)”.
+Este mï¿½dulo es el mï¿½s externo de la arquitectura, es el encargado de ensamblar los distintos mï¿½dulos, resolver las dependencias y crear los beans de los casos de use (UseCases) de forma automï¿½tica, inyectando en ï¿½stos instancias concretas de las dependencias declaradas. Ademï¿½s inicia la aplicaciï¿½n (es el ï¿½nico mï¿½dulo del proyecto donde encontraremos la funciï¿½n ï¿½public static void main(String[] args)ï¿½.
 
 **Los beans de los casos de uso se disponibilizan automaticamente gracias a un '@ComponentScan' ubicado en esta capa.**
+
+<h1>
+  <b>API Rest Foro</b>
+</h1>
+
+<h2>
+    Desafio planteado por <a href="https://www.aluracursos.com/">Alura latam</a> y <a href="https://www.oracle.com/ar/">Oracle</a> para el progama ONE
+</h2>
+
+
+<h2>
+  Informacion sobre el desafio planteado
+</h2>
+
+<p>Un foro es un espacio donde todos los participantes de una plataforma pueden plantear sus preguntas sobre determinados tÃ³picos. 
+  AquÃ­ en Alura Latam, los estudiantes utilizan el foro para sacar sus dudas sobre los cursos y proyectos en los que participan. 
+  Este lugar mÃ¡gico estÃ¡ lleno de mucho aprendizaje y colaboraciÃ³n entre estudiantes, profesores y moderadores.
+</p>
+<p>
+  Ya sabemos para quÃ© sirve el foro y conocemos su aspecto, Â¿pero sabemos cÃ³mo funciona detrÃ¡s de escena? Es decir, Â¿dÃ³nde se almacenan las informaciones? 
+Â¿CÃ³mo se tratan los datos para relacionar un tÃ³pico con una respuesta, o cÃ³mo se relacionan los usuarios con las respuestas de un tÃ³pico?
+
+Este es nuestro desafÃ­o, llamado ForoHub: en Ã©l, vamos a replicar este proceso a nivel de back end y, para eso, crearemos una API REST usando Spring.
+
+</p>
+
+<p>
+  Nuestra API se centrarÃ¡ especÃ­ficamente en los tÃ³picos, y debe permitir a los usuarios:
+</p>
+<ul>
+  <li>
+    Crear un nuevo tÃ³pico;
+  </li>
+  <li>
+    Mostrar todos los tÃ³picos creados;
+  </li>
+  <li>
+    Mostrar un tÃ³pico especÃ­fico;
+  </li>
+  <li>
+    Mostrar un tÃ³pico especÃ­fico;
+  </li>
+  <li>
+    Actualizar un tÃ³pico;
+  </li>
+  <li>
+    Eliminar un tÃ³pico.
+  </li>
+</ul>
+
+<p>
+  Es lo que normalmente conocemos como CRUD* (CREATE, READ, UPDATE, DELETE) y es muy similar a lo que desarrollamos en LiterAlura, pero ahora de forma completa, 
+agregando las operaciones de UPDATE y DELETE, y usando un framework que facilitarÃ¡ mucho nuestro trabajo.
+</p>
+
+<p>
+  *TraducciÃ³n libre (en orden): Crear, Consultar, Actualizar y Eliminar.
+</p>
+
+<p>
+  En resumen, nuestro objetivo con este challenge es implementar una API REST con las siguientes funcionalidades:
+</p>
+
+<ol>
+  <li>
+    API con rutas implementadas siguiendo las mejores prÃ¡cticas del modelo REST;
+  </li>
+  <li>
+    Validaciones realizadas segÃºn las reglas de negocio;
+  </li>
+  <li>
+    ImplementaciÃ³n de una base de datos relacional para la persistencia de la informaciÃ³n;
+  </li>
+  <li>
+    Servicio de autenticaciÃ³n/autorizaciÃ³n para restringir el acceso a la informaciÃ³n.
+  </li>
+</ol>
+
+<h2>
+  Configuraciones del entorno
+</h2>
+
+<ul>
+  <li>
+    Java (versiÃ³n 17) 
+  </li>
+  <li>
+    Gradle 8.8
+  </li>
+  <li>
+    Spring Boot (versiÃ³n 3.3.1)
+    Dependencias:
+      <ul>
+        <li>
+          Lombok  
+        </li>
+        <li>
+          Spring Web
+        </li>
+        <li>
+          Spring Boot DevTools
+        </li>
+        <li>
+          Spring Data JPA
+        </li>
+        <li>
+          Flyway Migration
+        </li>
+        <li>
+          MySQL Driver
+        </li>
+        <li>
+          Validation
+        </li>
+        <li>
+          Spring Security
+        </li>
+      </ul>
+  </li>
+</ul>
+
+<h2>
+    Documentacion
+</h2>
+
+<p>
+    Se implemento Swagger para documentar la aplicaciÃ³n, con el objetivo de generar
+    interfaz amigable y accesible.
+</p>
+
+<h2>
+    URI SWAGGER
+</h2>
+
+```
+http://localhost:8080/swagger-ui/index.html
+```
+<h2>
+    Como usar?
+</h2>
+
+Para poder hacer uso de la API es necesario cargar un usuario en bd, por razones de tiempo no se a generado un end point para realizar tal cosa, por lo tanto debe realizarse de forma la inserciÃ³n en la bd "INSERT INTO usuarios (nombre, email, contrasenia)
+VALUES ('su nombre', 'su email' , 'contraseÃ±a');". Cabe destacar que la contraseÃ±a debe de estar cifrada con BCrypt a la hora de guardarla en la db.
+
+```
+https://www.browserling.com/tools/bcrypt
+```
+
+<p>
+    Para poder hacer uso de los endpoint, toca descargar
+    las collections, que se disponen para ello.
+</p>
+
+
+
+
+
+<h2>
+    Estado del proyecto
+</h2>
+
+<ul>
+    <li>
+        El desafio planteado por <a href="https://www.aluracursos.com/">Alura latam</a> y <a href="https://www.oracle.com/ar/">Oracle</a> esta completo.
+    </li>
+    <li>
+        Ademas se agregaron end point para: crear, leer, modificar y borrar, tanto cursos, como respuestas.
+A modo de desafio personal.
+    </li>
+</ul>
